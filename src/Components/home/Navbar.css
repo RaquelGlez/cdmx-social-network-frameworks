@@ -1,0 +1,22 @@
+.navbar {
+  width: 100%;
+}
+.navbar-style {
+    background-color: #433c30;
+    color: white;
+    font-size: 1.5em;
+  }
+  
+  nav div ul li a{
+    color: white !important;
+  }
+  
+  .logo {
+    width: 128px;
+    border-radius: 7px;
+  }
+  
+  nav a {
+    display: block;
+    margin: 0 auto !important;
+  }

@@ -1,0 +1,19 @@
+body{
+    background-image: url(../../images/fondo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedor {
+    width: 400px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 1em;
+    background-color: white;
+  }
+
+
+.form-logo {
+    position: relative;
+    width: 60%;
+  }
