@@ -16,7 +16,10 @@ class Login extends Component {
         this.signup = this.signup.bind(this);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            nameRegister: '',
+            emailRegister: '',
+            passwordRegister: ''
         }
     }
 
@@ -35,14 +38,18 @@ class Login extends Component {
 
     signup(e) {
         e.preventDefault();
-        credentials.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function() {
-        }).catch((error)=>{
-        // Mensaje en consola si existe error de inicio de sesion
-          let errorCode = error.code;
-          let errorMessage = error.message;
-          console.log(errorCode);
-          console.log(errorMessage);
-        });
+        // const email = this.state.emailRegister;
+        // const password = this.state.passwordRegister;
+        credentials.auth().createUserWithEmailAndPassword(this.state.emailRegister, this.state.passwordRegister).catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/weak-password') {
+              alert('The password is too weak.');
+            } else {
+              alert(errorMessage);
+            }
+            console.log(error);
+          });
     }
 
         handleChange(e){
@@ -72,10 +79,41 @@ class Login extends Component {
                         <Button type="submit" onClick={this.login} className="btn-warning ">Iniciar sesión</Button>
                     </section>
                     <section className="btn btn-success btn-block form-button mb-3">
-                        <Button onClick={this.signup} className="btn btn-success">Registrate</Button>
-                    </section> 
-                        
+                        <Button data-toggle="modal" data-target="#exampleModal" style={{marginLeft: '25px'}} className="btn btn-success">Registrate</Button>
+                        {/* <Button onClick={this.signup} className="btn btn-success">Registrate</Button> */}
+                    </section>      
                 </div>
+
+                <div className="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Registro de nuevo usuario</h5>
+                                <Button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </Button>
+                        </div>
+                        <div className="modal-body">
+                            <section className="form-group">
+                                <Label className="form-label" for="name">Nombre</Label>
+                                <Input value={this.state.nameRegister} onChange={this.handleChange} type="name" id="name" className="form-control form-input" placeholder="Ingresa tu Nombre"/>
+                            </section>
+                            <section className="form-group">
+                                <Label className="form-label" for="email">Correo electrónico</Label>
+                                <Input onChange={this.handleChange} value={this.state.emailRegister} type="email" className="form-control form-input" id="email_register" placeholder="usuario@example.com"/>
+                            </section>
+                            <section className="form-group">
+                                <Label className="form-label" for="password" >Contraseña</Label>
+                                <Input value={this.state.passwordRegister} onChange={this.handleChange} type="password" className="form-control form-input" id="password_register" />
+                            </section>
+                        </div>
+                        <div className="modal-footer">
+                            <Button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</Button>
+                            <Button onClick={this.signup} id="register" type="button" style={{marginLeft: '25px'}} className="btn btn-success">Registrarse</Button>
+                        </div>
+                    </div>
+                </div>
+                </div>   
                 
             </main>
             

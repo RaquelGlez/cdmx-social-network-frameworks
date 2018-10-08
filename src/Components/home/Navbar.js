@@ -20,12 +20,6 @@ class Navbar extends Component {
 
     render() {
       return (
-
-        // <nav className="navbar navbar-light bg-light">
-        //     <a className="navbar-brand" href="">
-        //         <img src={logo} width="74px" alt="logo-mi-sazon" />
-        //         </a>
-        // </nav>
         <nav className="navbar navbar-expand-lg navbar-light navbar-style">
             <a className="navbar-brand" >
             <img src={logo} width="74px" alt="logo-mi-sazon" />
@@ -44,6 +38,9 @@ class Navbar extends Component {
                     </li>
                 </ul>
             </div>
+            <form className="form-inline my-2 my-lg-0">
+                <span className="navbar-text">Bienvenid@ {this.props.user.displayName}</span>
+            </form>
         </nav>
     );
   }
